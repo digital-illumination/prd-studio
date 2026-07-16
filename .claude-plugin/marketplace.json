@@ -1,0 +1,7 @@
+{
+  "name": "prd-studio",
+  "owner": { "name": "Digital Illumination Limited" },
+  "plugins": [
+    { "name": "prd-studio", "source": "./", "description": "Draft a PRD, then grill it until it is stable under interrogation. Personas, decomposition, handoff and build validation.", "version": "0.2.0", "license": "MIT" }
+  ]
+}

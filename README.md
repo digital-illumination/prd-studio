@@ -1,16 +1,19 @@
 # PRD Studio
 
-A PRD co-author and sparring partner, built as a set of instructions for
-Claude. It drafts a Product Requirements Document from your concept material,
-then *grills* it: asking you the questions the document cannot answer, and
-attacking the document from five perspectives, folding every answer back in
-until the PRD is **stable under interrogation**. You stay the authority
-throughout: it sharpens your intent, it never overrides it, and it never signs
-off. You do.
+A PRD co-author and sparring partner for Claude. It drafts a Product
+Requirements Document from your concept material, then *grills* it: asking
+you the questions the document cannot answer, and attacking the document
+from ten adversarial perspectives, folding every answer back in until the
+PRD is **stable under interrogation**. Once you sign it, PRD Studio carries
+the PRD on through decomposition, handoff to build, and validation of the
+finished build against it. You stay the authority throughout: it sharpens
+your intent, it never overrides it, and it never signs off. You do.
 
-No application to install and no service to sign up for. The Studio is plain
-markdown: a set of project instructions, a PRD template, and an optional
-Claude Code skill. Bring your own Claude.
+No hosted service, ever. The Studio is plain markdown any way you install
+it: a skill, a set of persona files, a PRD template, project instructions
+for the claude.ai route, and (optionally) a small local MCP server for
+persona lookup. Bring your own Claude; nothing here touches anyone else's
+servers.
 
 ## Why
 
@@ -28,48 +31,150 @@ Three rules hold the whole method together:
 - **The product owner is the authority.** The grill sharpens intent; it never
   overrides it, and it never flatters you into sign-off.
 
-## The five commands
+## Two loops
 
-| You type | What happens |
-|---|---|
-| **DRAFT** | Generates PRD v0 for the slice you name, goals first, using only what is in the knowledge files. Anything it cannot know becomes an `[OPEN: ...]` marker. |
-| **GRILL ME** | It asks *you* up to five hard questions the PRD cannot answer from its own text, hardest first. Answer what you know; park what you do not. Your answers are folded straight into the document. |
-| **GRILL THE PRD** | Five personas attack the *document*: engineer, QA, an end user mid-task, security & compliance, platform architect. Questions the document answers cleanly are not listed; the rest become logged gaps. |
-| **STATUS** | An honest convergence report: rounds run, gaps still open and whose they are, goals without measurements, and a verdict, CONVERGED or NOT CONVERGED with the shortest path. |
-| **EXPORT** | The complete current PRD as clean markdown, ready to commit to a repo or paste into a wiki. Export at the end of every session; never leave work in chat. |
+PRD Studio sits inside a familiar shape: an outer **human judgement loop**,
+where the product owner sets intent, marks the work, banks corrections, and
+makes the trust call, wrapped around a fast inner **agent loop** of draft,
+evidence check, adversarial pass, revise. PRD Studio is the intent end of
+that shape: the grill converges intent into a PRD stable enough to build
+from, and the validation commands grade the build against it once work
+starts.
 
-Run order in practice: DRAFT once per slice, then alternate GRILL ME and
-GRILL THE PRD, checking STATUS as you go, and finish every sitting with
-EXPORT. Thirty to forty-five minutes beats a marathon; convergence usually
-takes two or three sittings, not one.
+## The twelve commands
+
+Case-insensitive, with or without the leading slash.
+
+| Group | Command | What it does |
+|---|---|---|
+| Authoring | `DRAFT` | Generates PRD v0 for the slice you name, goals first, each with a measurement, using only what is in the knowledge files. Anything unknowable becomes an `[OPEN: ...]` marker. |
+| Authoring | `GRILL ME` | Asks you up to five hard questions the PRD cannot answer from its own text, hardest first, each tagged with its section and a gap class. Your answers fold straight into the document. |
+| Authoring | `GRILL THE PRD [persona ...]` | The installed personas attack the document itself: every persona with no argument, or only the ones you name. A question the PRD answers cleanly is never listed; the rest become classified gaps in the register. |
+| Authoring | `STATUS` | An honest convergence report: rounds run, gaps still open and whose they are, goals without measurements, and a verdict, CONVERGED or NOT CONVERGED, with the shortest path. |
+| Authoring | `EXPORT` | The complete current PRD as clean markdown, ready to commit to a repo or paste into a wiki. |
+| Personas | `PERSONAS` | Lists the installed personas: name, title, lens, version, provenance. |
+| Personas | `ADD-PERSONA <name>` | Scaffolds a new persona from the template, then interviews you briefly on the failure mode it should catch that no existing persona does. |
+| Execution | `DECOMPOSE` | From a converged PRD, emits the behaviour ledger: every functional behaviour with a stable id, a Given/When/Then acceptance check, and a blast-radius tag, applying the reuse test to sort platform from configuration. |
+| Execution | `HANDOFF` | Completes the PRD's agent execution contract (read-first, do-not-change, validation loop, stop conditions, reporting) and cuts epics and stories traced to goals and behaviour ids. |
+| Execution | `VALIDATE-PLAN` | An adversarial pass over a proposed execution plan against the PRD before build starts: orphaned behaviours, blast-radius overruns, where an agent would stall. |
+| Execution | `VALIDATE-BUILD` | Grades a finished build against the PRD, behaviour by behaviour, demanding evidence. Verdict per behaviour: MET / PARTIAL / UNMET / NO-EVIDENCE; no evidence is never a pass. |
+| Trust | `GRILL-AUDIT` | Exports the audit pack for a completed grill round: every question asked, its persona, its reasoning, what changed, plus blank columns for a human expert to mark each row CORRECT / PARTIAL / WRONG. |
+
+**Sign-and-lock:** once a PRD's Status is SIGNED, it is immutable. Nothing
+edits signed text; a change becomes a new revision instead, stated plainly
+in the change log.
 
 **What "converged" means:** two consecutive grill rounds producing zero new
 material gaps, every goal carrying a measurement, and the open-questions
 register empty or every item explicitly parked with an owner. Not perfect.
 Stable under interrogation.
 
-## Setup
+Run order in practice: `DRAFT` once per slice, then alternate `GRILL ME` and
+`GRILL THE PRD`, checking `STATUS` as you go, and finish every sitting with
+`EXPORT`. Thirty to forty-five minutes beats a marathon; convergence usually
+takes two or three sittings, not one. Once the PRD is signed, `DECOMPOSE`
+and `HANDOFF` cut the build plan, `VALIDATE-PLAN` grills that plan before
+work starts, and `VALIDATE-BUILD` grades the finished build against the
+PRD. Run `GRILL-AUDIT` whenever you want a human expert to mark a completed
+round and bank corrections back into the persona files.
 
-### As a Claude Project (claude.ai)
+## The persona library
 
-1. Go to **claude.ai** → **Projects** → **New project**. Name it
-   "PRD Studio".
-2. Paste the contents of [`project-instructions.md`](project-instructions.md)
-   into the project's custom instructions.
-3. Add to the project's knowledge:
-   - [`prd-template.md`](prd-template.md), the shape it drafts against;
-   - your product concept material (concept documents, decompositions,
-     research, prior decisions).
-4. Start a chat and type `STATUS`. If it answers in role with an honest
-   "no PRD yet", you are set.
+Personas are files, not hard-coded prompts:
+[`skills/prd-studio/personas/`](skills/prd-studio/personas/), one markdown
+file per persona, each carrying its lens, what it hunts, what a cleanly
+answered PRD looks like to it, and a changelog. This release ships ten.
 
-### As a Claude Code skill
+| Persona | Tier | Lens |
+|---|---|---|
+| Engineer | Core | Could I build this without guessing, and where would I stall? |
+| QA | Core | Can every behaviour here be verified, and which goal has no measurement? |
+| End User | Core | Does this match how I actually work, and what would I reach for that is not here? |
+| Security & Compliance | Core | What is the data sensitivity, the audit trail, and the disclosure surface, who is the accountable human, and what here is undefined? |
+| Platform Architect | Core | What is core capability here versus configuration, and is the boundary between them drawn right? |
+| Data Protection | Extended | What is the lawful basis for holding this data, how long is it kept, can a subject exercise their rights, and does anything cross a border it should not? |
+| Accessibility | Extended | Who is quietly excluded by this design, and does the evidence for "it works" actually cover assistive technology and cognitive load, not just sighted mouse use? |
+| Commercial Viability | Extended | Who pays, what does it cost to serve one more customer, and what single assumption, if wrong, kills the business case? |
+| Operations & Support | Extended | What does day two look like, who gets paged, who fields the ticket, and can anyone see what the system is actually doing right now? |
+| Regulator | Extended | Which regimes actually apply here, and if an inspector asked for evidence tomorrow, does the document show where it would come from? |
 
-1. Create `.claude/skills/prd-studio/` in your project.
-2. Copy [`SKILL.md`](SKILL.md) and [`prd-template.md`](prd-template.md) into
-   it.
-3. Put your concept material somewhere in the repository and mention it when
-   you draft. The commands work with or without the leading slash.
+### Adding a persona
+
+Personas are files, so the library grows without touching any code. Run
+`ADD-PERSONA <name>` to scaffold one from
+[`skills/prd-studio/personas/TEMPLATE.md`](skills/prd-studio/personas/TEMPLATE.md);
+the command interviews you on the failure mode it should catch, then fills
+the template in.
+[`AUTHORING.md`](skills/prd-studio/personas/AUTHORING.md) is the method
+behind each section of that template.
+
+The quality bar is not "sounds useful". A new persona earns its place in the
+library only by catching a seeded defect in the eval benchmarks (below) that
+no existing persona catches, or by sharpening an existing catch materially.
+Overlap with an existing persona is the most common reason a proposed one
+does not ship.
+
+## Install
+
+Three routes, clearest first.
+
+### 1. Claude Code plugin (recommended)
+
+```
+/plugin marketplace add digital-illumination/prd-studio
+/plugin install prd-studio@prd-studio
+```
+
+This installs the skill plus one independent grill subagent per persona
+(`agents/grill-<persona>`). During `GRILL THE PRD`, the Agent tool spawns
+all ten in parallel: personas cannot see each other's questions, so they
+cannot politely converge on each other's blind spots. A synthesiser agent
+then dedupes and ranks what comes back into one ordered round.
+
+### 2. claude.ai Project
+
+1. Create a project and paste
+   [`project-instructions.md`](project-instructions.md) into its custom
+   instructions.
+2. Add to the project's knowledge:
+   [`skills/prd-studio/prd-template.md`](skills/prd-studio/prd-template.md),
+   the persona files you want from
+   [`skills/prd-studio/personas/`](skills/prd-studio/personas/), and your
+   concept material.
+3. Start a chat and type `STATUS`. An honest "no PRD yet", in role, means
+   you are set.
+
+Honest note: this route runs personas sequentially in one context. Same
+method, less rigour than the parallel plugin form; a persona reading the
+previous persona's questions before writing its own is a weaker grill than
+ten independent attempts.
+
+### 3. Manual skill copy
+
+Copy [`skills/prd-studio/`](skills/prd-studio/) into your project's
+`.claude/skills/`. Same skill as the plugin route, without the parallel
+subagents: personas run sequentially, as in the claude.ai route.
+
+## Persona evals
+
+[`evals/`](evals/) holds benchmark PRDs for fictional products, each with
+defects seeded on purpose and an answer key of which persona should catch
+which. Running the library against a benchmark produces a catch rate (how
+many seeded defects were caught) and a false-positive rate (how many
+questions pointed at something that was not actually a gap). The regression
+rule: editing a persona must not lower its catch rate on the benchmarks it
+already passes. See [`evals/README.md`](evals/README.md) for the scoring
+detail and the current benchmarks.
+
+## Persona registry
+
+[`registry/`](registry/) is a small MCP server that serves the persona
+library live from disk to any MCP client, so a tool other than Claude Code
+can pull persona definitions at call time instead of a hand copy of the
+files. Stdio only for now; a hosted mode, so a claude.ai connector or a
+remote client could reach the same registry over the network, is deferred,
+not ruled out. See [`registry/README.md`](registry/README.md) for the tools
+it exposes and how to run it.
 
 ## Tips from real use
 

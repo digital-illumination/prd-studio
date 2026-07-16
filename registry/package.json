@@ -1,0 +1,25 @@
+{
+  "name": "prd-studio-registry",
+  "version": "0.2.0",
+  "private": false,
+  "description": "MCP server that serves PRD Studio's adversarial personas live to any MCP client (stdio transport).",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.20",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}

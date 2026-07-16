@@ -13,6 +13,9 @@ working notes, not the requirement. -->
 - Engineering lead: [name, once the architecture session is scheduled]
 - Slice / scope anchor: [which part of the product concept this covers]
 - Last updated: [date]
+- Once Status is SIGNED, this PRD is locked: no further edits to its text.
+  Changes happen only as a new revision (new Change log entry, the change
+  stated plainly), never as a silent edit to signed content.
 
 ## Decision summary
 
@@ -59,9 +62,15 @@ ground; be generous here.
 ## 5. Functional behaviour
 
 What it does, told as behaviours, mapped to any domain frameworks or standards
-the product must honour. Each behaviour numbered (FB-1, FB-2...) so epics and
-stories can trace to it, and each with an acceptance check a person can
-validate before release.
+the product must honour. Each behaviour carries a stable id (FB-1, FB-2...) so
+epics and stories can trace to it, an acceptance check a person can validate
+before release, and a blast-radius tag so review routing matches the risk.
+
+| Id | Behaviour (one observable thing) | Given / When / Then | Blast radius |
+|----|-----------------------------------|----------------------|--------------|
+| FB-1 | | | |
+
+Blast radius: Minimal / Contained / Broad / Critical.
 
 ## 6. Platform vs configuration
 
@@ -102,6 +111,17 @@ product intent to agent-executable work. Filled in as the open questions close.
 - Validation loop: [tests, checks, blast-radius review, the acceptance oracles above]
 - Stop conditions: [done when...; stop for a human when...]
 - Reporting: [what each task reports back, traceable from goal to merge]
+
+## Validation report
+
+Filled in by `/validate-build` once there is a build to grade against this
+PRD. Empty until then.
+
+| Goal | Behaviour ids | Story | Merge / artefact | Evidence | Verdict |
+|------|---------------|-------|------------------|----------|---------|
+
+Verdict per goal is one of MET / PARTIAL / UNMET / NO-EVIDENCE. An
+unverifiable claim is NO-EVIDENCE; no evidence is never a pass.
 
 ## Change log (grill history)
 
