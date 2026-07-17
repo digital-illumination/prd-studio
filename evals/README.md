@@ -114,9 +114,12 @@ against it the same way.
 
 To regression-test a persona edit, spawn the persona as a fresh agent with
 only the persona definition and the benchmark `PRD.md`, never the answer key,
-capped at three questions. Mark the questions against the key and compare
-the result to that persona's recorded baseline in `BASELINES.md`. An edit
-must not lower any per-benchmark catch-rate against its baseline, and any
+capped at three questions. Under a plugin install, create `evals/.blind`
+before spawning the blind agents and remove it before marking the questions
+against the key, so the key is mechanically unreadable for the run rather
+than merely withheld by convention. Mark the questions against the key and
+compare the result to that persona's recorded baseline in `BASELINES.md`. An
+edit must not lower any per-benchmark catch-rate against its baseline, and any
 new false positive counts against it, the same standard as the regression
 rule above. If the persona has no recorded baseline against the current key
 version, record one first (unedited persona, same procedure) before treating

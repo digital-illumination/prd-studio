@@ -64,6 +64,16 @@ Case-insensitive, with or without the leading slash.
 edits signed text; a change becomes a new revision instead, stated plainly
 in the change log.
 
+**Enforced by hooks:** on the Claude Code plugin route, sign-and-lock is not
+just a convention. A `PreToolUse` hook
+(`hooks/sign-and-lock-guard.js`) inspects every `Edit` or `Write` and refuses
+the tool call outright when the target PRD's Metadata Status line is already
+SIGNED. Blind grill runs get the same treatment: create `evals/.blind`
+before spawning blind persona agents, and a second hook blocks any `Read` of
+that benchmark's `ANSWER-KEY.md` until you remove it. The claude.ai project
+route has no hooks, so there both rules stay instructions for the model to
+follow, not mechanical guarantees.
+
 **What "converged" means:** two consecutive grill rounds producing zero new
 material gaps, every goal carrying a measurement, and the open-questions
 register empty or every item explicitly parked with an owner. Not perfect.
