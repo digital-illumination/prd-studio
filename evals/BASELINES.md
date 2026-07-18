@@ -232,6 +232,149 @@ A-arm results above are the current baselines for end-user and
 operations-support against the curated keys; the B-arm results are the
 baseline for the shipped engineer v1.1.0.
 
+## Full panel v2 and calibration probes, 2026-07-18 (curated keys)
+
+Everything below was scored against the curated keys (bench-01: 29 seeds,
+bench-02: 21, bench-03: 27; 77 in total). Same setup as ever: fresh agent per
+run, persona file and PRD only, blind, two capped trials plus one sweep per
+cell, one marker per cell except where stated.
+
+### Panel recall (shipped personas: engineer 1.1.0, all others 1.0.0)
+
+| Benchmark | Seeds | Capped panel union | With sweep union |
+|---|---|---|---|
+| bench-01-team-scheduler | 29 | 20/29 | 24/29 |
+| bench-02-usage-analytics | 21 | 14/21 | 17/21 |
+| bench-03-consumer-booking | 27 | 19/27 | 25/27 |
+
+Suite-level: 53/77 capped, 66/77 (86%) with sweeps, against keys nearly
+twice the size of the v1 panel's.
+
+### bench-01-team-scheduler (shipped personas)
+
+| Persona | Own seeds | Trial 1 | Trial 2 | Sweep | Cross-catches (all runs) | FPs |
+|---|---|---|---|---|---|---|
+| engineer | 10 | D-2, D-8a | D-16, D-8a | D-10, D-17, D-2, D-7, D-8b | D-1, D-12, D-4 | 0 |
+| qa | 11 | D-1, D-12 | D-1, D-12, D-2 | D-1, D-12, D-2, D-8b | D-4 | 1 |
+| end-user | 4 | none | D-9 | D-19 | D-1, D-18, D-2, D-4, D-8b | 0 |
+| security-compliance | 2 | D-22, D-5 | none | D-22, D-5 | D-15, D-16, D-24, D-4 | 0 |
+| platform-architect | 3 | D-18, D-4 | D-18, D-4 | D-18, D-4 | D-12, D-2 | 0 |
+| data-protection | 3 | D-15, D-24, D-3 | D-15, D-24, D-3 | D-15, D-24 | D-2 | 0 |
+| accessibility | 2 | D-6 | D-6 | D-6 | D-27, D-4 | 0 |
+| commercial-viability | 3 | D-25, D-26 | D-14, D-25, D-26 | D-25, D-26 | D-2 | 0 |
+| operations-support | 3 | D-7 | D-13 | D-13, D-27, D-7 | D-4, D-5, D-8b | 0 |
+| regulator | 2 | D-3 | D-3 | D-3 | D-15, D-18, D-2, D-4 | 0 |
+
+### bench-02-usage-analytics (shipped personas)
+
+| Persona | Own seeds | Trial 1 | Trial 2 | Sweep | Cross-catches (all runs) | FPs |
+|---|---|---|---|---|---|---|
+| engineer | 6 | D-14 | none | D-13, D-14 | D-1, D-10, D-2, D-4 | 1 |
+| qa | 5 | D-10, D-4 | D-10, D-3 | D-10, D-3, D-4 | D-1 | 0 |
+| end-user | 0 | none | none | none | D-1, D-12, D-13 | 0 |
+| security-compliance | 5 | D-19 | D-7 | D-19 | D-1, D-10, D-18, D-2 | 0 |
+| platform-architect | 2 | D-2 | none | D-17, D-2 | D-1, D-9 | 1 |
+| data-protection | 7 | D-1, D-10, D-18 | D-1, D-18 | D-1, D-16, D-17, D-18 | D-2 | 0 |
+| accessibility | 1 | D-11 | D-11 | D-11 | D-1, D-4 | 0 |
+| commercial-viability | 2 | D-5, D-9 | D-5, D-9 | D-5, D-9 | D-1, D-2 | 0 |
+| operations-support | 2 | D-6 | D-6 | D-6 | D-1, D-10 | 1 |
+| regulator | 4 | D-1, D-2 | D-1, D-2 | D-1, D-17, D-2 | D-10, D-18, D-4 | 0 |
+
+### bench-03-consumer-booking (shipped personas)
+
+| Persona | Own seeds | Trial 1 | Trial 2 | Sweep | Cross-catches (all runs) | FPs |
+|---|---|---|---|---|---|---|
+| engineer | 6 | D-8 | D-15 | D-15, D-7, D-8 | D-24, D-4, D-5 | 0 |
+| qa | 6 | D-1, D-15 | D-1, D-19 | D-1, D-15, D-18, D-19, D-8 | D-10, D-4, D-5 | 0 |
+| end-user | 6 | D-13, D-15 | D-11, D-3 | D-15 | D-18, D-5, D-8 | 0 |
+| security-compliance | 4 | D-22, D-23, D-5 | D-21, D-23, D-5 | D-21, D-22, D-23, D-5 | none | 0 |
+| platform-architect | 3 | D-4 | D-4 | D-4 | D-5 | 0 |
+| data-protection | 2 | D-23, D-25 | D-23 | D-23, D-25 | D-21, D-5 | 0 |
+| accessibility | 3 | D-10, D-6 | D-10, D-26, D-6 | D-10, D-26, D-6 | D-8 | 0 |
+| commercial-viability | 3 | D-14 | D-14 | D-12, D-14, D-2 | D-4, D-5 | 0 |
+| operations-support | 4 | none | none | D-16 | D-21, D-5 | 2 |
+| regulator | 4 | D-21, D-9 | D-9 | D-21, D-23, D-27, D-9 | D-10, D-22, D-4, D-5 | 0 |
+
+### Suite totals (shipped personas, own seeds only)
+
+| Persona | Own seeds (suite) | Capped union | With sweep | FPs |
+|---|---|---|---|---|
+| engineer | 22 | 6 | 12 | 1 |
+| qa | 22 | 9 | 12 | 1 |
+| end-user | 10 | 5 | 6 | 0 |
+| security-compliance | 11 | 8 | 8 | 0 |
+| platform-architect | 8 | 4 | 5 | 1 |
+| data-protection | 12 | 8 | 10 | 0 |
+| accessibility | 6 | 5 | 5 | 0 |
+| commercial-viability | 8 | 6 | 8 | 0 |
+| operations-support | 9 | 3 | 5 | 3 |
+| regulator | 10 | 5 | 8 | 0 |
+
+### Salience v2 (seeds uncaught by the shipped panel, any mode)
+
+- bench-01: D-11, D-20, D-21, D-23, D-28
+- bench-02: D-8, D-15, D-20, D-21
+- bench-03: D-17, D-20
+
+Most of these are banked seeds on their first outing; bench-02's D-8 was
+caught in the v1 panel and by two of three models in the cross-model probe,
+so its absence here is run variance, not key damage. The banked seeds that
+went uncaught are the next salience review's input.
+
+### A/B rework verdicts (second attempt, both REJECTED)
+
+The 1.1.1 rework drafts for end-user and operations-support ran as B arms
+against the shipped 1.0.0 files, inside this panel:
+
+- **end-user 1.1.1: REJECTED.** Two capped false positives on bench-02 (the
+  no-seed benchmark, the exact failure the rework targeted) and a capped
+  drop on bench-03 (the shipped arm caught four own seeds including D-13,
+  the accepted-as-hard seed; the rework caught two). Diagnosis: the
+  prioritisation line did not stop the new heuristics from displacing
+  reliable catches under the cap.
+- **operations-support 1.1.1: REJECTED, with the diagnosis inverted.** The
+  false-positive cure worked completely (zero FPs in all nine runs, against
+  the shipped arm's three), and its bench-02 and bench-03 sweeps improved.
+  But on bench-01 it caught nothing at all in any mode, where the shipped
+  arm caught D-7 and D-13 capped. Diagnosis: the calibration boundary
+  over-suppressed; an acceptance check that merely exists is not one that
+  answers the failure-path question, and the draft's wording does not make
+  that distinction sharply enough.
+
+Both personas remain shipped at 1.0.0. The rejected drafts and diagnoses are
+preserved for a third attempt; the gate has now rejected four of five
+hardening attempts, which is the gate doing its job.
+
+### Scorer-agreement probe (double marking)
+
+Six persona-benchmark pairs across the three benchmarks, one fresh capped
+run each, the same output scored by two independent markers. After normalising marker output to
+bare defect ids: catch identification agreed in twelve of twelve dimensions
+(own and cross, all six cells). The single divergence in the whole probe was
+one question one marker scored as a false positive and the other as
+unscored. Conclusion: catch-rates in this file carry little marker noise;
+false-positive counts carry roughly one question of boundary fuzz, which the
+"false-positive boundary" rule in `README.md` now pins down.
+
+### Cross-model probe
+
+Engineer 1.1.0 on bench-02, three runs (two capped, one sweep) per model,
+single marker per model:
+
+| Model | Own catches (union) | Cross | FPs | Unscored |
+|---|---|---|---|---|
+| Haiku | D-6, D-8, D-12, D-13 | D-1, D-10 | 0 | 8 |
+| Sonnet | D-6, D-12 | D-1, D-4, D-9, D-10 | 2 | 8 |
+| Opus | D-6, D-8, D-12, D-13 | D-1, D-2, D-9, D-10, D-18 | 0 | 5 |
+
+The persona file transfers across tiers: no tier produced nonsense, and the
+spread between models sits within the same range as run-to-run variance on a
+single model. Sonnet's two false positives match its own single-model
+variance elsewhere in this file rather than indicating a tier problem, but
+they are false positives all the same. The marker noted two of
+Haiku's own catches as borderline readings; a stricter marker would score
+Haiku 2/6.
+
 ## Reading these numbers
 
 Baselines recorded against an older key version are not directly comparable

@@ -61,9 +61,19 @@ lines of questioning, so it became D-8a and D-8b.
   Questions about genuinely unseeded-but-arguable material are neither
   catches nor false positives; ignore them, or note them as candidates for a
   future seeded defect.
+- **The false-positive boundary** (added after the double-marking probe, the
+  one place two independent markers diverged): a false positive requires the
+  question to assert as a gap something a clean area's own statement
+  explicitly answers. A question probing near a clean area without
+  contradicting its claim is unscored, not a false positive. When torn,
+  score unscored and note it.
 - **Suite score** for a persona: total catches / total seeded across all
   benchmarks, reported alongside the false-positive count. Report both; a
   persona that catches everything by flagging everything has not improved.
+
+The full procedures used to produce `BASELINES.md` (panel runs, A/B
+regression, double-marking, cross-model probes) are written up step by step
+in [`RUNBOOK.md`](RUNBOOK.md).
 
 ## How to run manually
 

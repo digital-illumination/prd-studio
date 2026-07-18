@@ -1,6 +1,6 @@
 {
   "name": "prd-studio-registry",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "private": false,
   "description": "MCP server that serves PRD Studio's adversarial personas live to any MCP client (stdio transport).",
   "type": "module",
