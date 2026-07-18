@@ -184,6 +184,54 @@ variance this multi-trial design exists to expose.
   confirmation the rule demands. Curation is a separate pass; none were
   banked in this release.
 
+## Persona A/B regression, 2026-07-18 (curated keys)
+
+The first use of the regression gate on real edits. After the sweep-curation
+pass grew the keys (bench-01: 29 seeds, bench-02: 21, bench-03: 27), the
+three under-hitting personas from the full panel (engineer, end-user,
+operations-support) were hardened to draft v1.1.0 and run A/B against their
+unedited originals: same day, same keys, both arms blind, two capped trials
+plus one sweep per cell.
+
+| Persona | Benchmark | A capped (own) | B capped (own) | A sweep (own) | B sweep (own) | FP delta (B-A) |
+|---|---|---|---|---|---|---|
+| engineer | bench-01 | D-8a, D-8b, D-16 | D-2, D-8a, D-8b | 5 catches | 4 catches | 0 |
+| engineer | bench-02 | D-13, D-14 | D-12 | D-13 | D-6, D-12, D-13, D-14 | 0 |
+| engineer | bench-03 | D-15, D-16 | D-8, D-15, D-16 | 3 catches | 4 catches | 0 |
+| end-user | bench-01 | D-9, D-19 | D-9 | D-19 | D-11, D-19 | 0 |
+| end-user | bench-02 | none (0 own seeds) | none | none | none | +2 |
+| end-user | bench-03 | D-3, D-11 | D-11 | 3 catches | 3 catches | 0 |
+| operations-support | bench-01 | none | D-7, D-13 | 3 catches | 3 catches | 0 |
+| operations-support | bench-02 | D-6 | D-6, D-12 | D-6 | D-6, D-12 | 0 |
+| operations-support | bench-03 | none | none | D-22 | D-22 | +3 |
+
+Verdicts, applying the regression rule and the variance clause:
+
+- **engineer v1.1.0: KEPT.** Zero false positives in all six runs. Capped
+  totals equal overall (a one-catch drop on bench-02 sits within run
+  variance) and its hardened sweeps dominated, catching D-6 and D-12 on
+  bench-02, seeds no engineer run had caught before (D-6 has long been an
+  operations-support catch; it had never fallen to the engineer lens).
+- **end-user v1.1.0: REJECTED, reverted to 1.0.0.** Capped own catches
+  halved across the suite (four to two) and it introduced false positives on
+  the benchmark where it has no seeds. Its sweeps did reach previously
+  uncaught seeds (D-11 on bench-01; the reworded D-7 on bench-03), so the
+  new heuristics have value, but as drafted they crowd the capped question
+  budget out of previously reliable catches. Rework queued.
+- **operations-support v1.1.0: REJECTED, reverted to 1.0.0.** Its capped
+  gains were the strongest of the three (D-7 and D-13 caught capped on
+  bench-01, D-12 on bench-02, all previously missed), but it introduced
+  false positives in both capped trials on bench-03, pressing the same
+  keyed-clean surface three times across modes. Under the rule, new false
+  positives reject the edit even where catches improved. Rework queued: keep
+  the new hunts, add the boundary that a defined, keyed-clean rejection
+  surface is not a gap.
+
+The rejected 1.1.0 drafts are preserved outside the repo for rework. The
+A-arm results above are the current baselines for end-user and
+operations-support against the curated keys; the B-arm results are the
+baseline for the shipped engineer v1.1.0.
+
 ## Reading these numbers
 
 Baselines recorded against an older key version are not directly comparable

@@ -1,6 +1,6 @@
 # Answer key: bench-02-usage-analytics (Beacon)
 
-Twelve seeded defects. Scoring rules are in `../../README.md`. "Location"
+Twenty-one seeded defects (twelve original, nine banked from live-grill curation). Scoring rules are in `../../README.md`. "Location"
 gives the section and a quote fragment sufficient to find the seed. Where two
 personas are listed, either catching it counts for that persona's rate.
 
@@ -43,7 +43,7 @@ personas are listed, either catching it counts for that persona's rate.
 
 ### D-6: no operational behaviour behind the availability numbers
 
-- **Location:** Section 7 gives SLO targets (99.9% ingestion, 99.5% dashboards) but sections 5 and 7 define no behaviour for ingestion backlog or outage, no backfill story, no alerting when a workspace's events stop flowing, and no support tooling for "our chart went flat on Tuesday"
+- **Location:** Section 7 gives SLO targets ("event ingestion meets a 99.9% monthly availability target; the dashboard layer meets 99.5%") but sections 5 and 7 define no behaviour for ingestion backlog or outage, no backfill story, no alerting when a workspace's events stop flowing, and no support tooling for a chart-went-flat report
 - **Gap class:** MISSING
 - **Expected persona(s):** operations-support, engineer
 - **Catching question looks like:** "When ingestion backs up or a customer's SDK deploy silently breaks capture, what happens? Is anyone alerted that a workspace's events stopped, are gaps backfilled or permanently missing from rollups, and what can support show a customer who asks why Tuesday is flat? An SLO number is not an operational story."
@@ -90,6 +90,78 @@ personas are listed, either catching it counts for that persona's rate.
 - **Expected persona(s):** engineer, operations-support
 - **Catching question looks like:** "A mobile event can legitimately arrive 72 hours after its day's rollup was computed. Is the rollup restated, and if so when, or is the event silently absent from dashboards but present in the explorer? Yesterday's number changing under a shared report, or never including late events, both break promises this document makes; which one do we pick and state?"
 
+### D-13: dashboard state before any rollup exists is undefined (banked 2026-07-18)
+
+- **Location:** Section 5, FB-4: "Dashboard counts are computed from daily rollups generated at 02:00 workspace-local time covering the previous day"; no stated behaviour for the current day before that rollup runs, nor for a workspace with no rollup ever computed yet
+- **Gap class:** MISSING
+- **Expected persona(s):** engineer, qa
+- **Catching question looks like:** "FB-4 only defines dashboard counts from the previous day's rollup. What does the dashboard show today, before 02:00 runs, and what does a brand-new workspace with no rollup yet show? If both render as zero, a product manager cannot tell 'no adoption' from 'not computed yet', and I cannot build the acceptance check for either state without one being named."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by engineer, qa, end-user
+
+### D-14: FB-6 behaviour on an ineligible plan is undefined (banked 2026-07-18)
+
+- **Location:** Section 5, FB-6: "White-labelling is available on eligible plans." No behaviour stated for a request made on an ineligible plan.
+- **Gap class:** MISSING
+- **Expected persona(s):** engineer, qa
+- **Catching question looks like:** "FB-6 gates white-labelling to eligible plans but never says what happens when an ineligible-plan workspace tries to generate one. Is the report blocked outright, or does it fall back to a Beacon-branded version? The acceptance check only covers the eligible path; I need the ineligible-plan behaviour named before I can build or test the gate."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by engineer, qa
+
+### D-15: deletion-request submission has no cross-workspace authorisation check (banked 2026-07-18)
+
+- **Location:** Section 5, FB-8: "A workspace administrator submits a deletion request for an end user's pseudonymous id" versus Section 7: "every query path is scoped to a single workspace; cross-workspace reads are structurally impossible in the query layer"
+- **Gap class:** MISSING
+- **Expected persona(s):** security-compliance
+- **Catching question looks like:** "Section 7's tenant isolation guarantee covers query paths, reads. FB-8 is a write, a deletion request keyed only by a pseudonymous id. What stops an administrator in workspace A submitting a deletion request naming a pseudonymous id that actually belongs to workspace B? Tenant isolation on reads does not answer whether deletion submission is validated against the submitting workspace."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by security-compliance
+
+### D-16: no classification gate on sensitive host-supplied attributes (banked 2026-07-18)
+
+- **Location:** Section 5, FB-5: "A product manager defines segments over user attributes supplied by the host application"
+- **Gap class:** MISSING
+- **Expected persona(s):** security-compliance, data-protection
+- **Catching question looks like:** "Host applications can supply any attribute as a segmentable field, with no classification gate named. What stops a host app supplying a special-category attribute, health status or ethnicity, and it turning up as a segment dimension in a saved or shared report? FB-3's taxonomy governs event names, not attribute sensitivity."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by security-compliance, data-protection
+
+### D-17: retention durations have no lawful basis or per-market carve-out (banked 2026-07-18)
+
+- **Location:** Section 7: "Retention: raw events are retained for 13 months; daily rollups are retained for 36 months. Both are fixed platform-wide at launch."
+- **Gap class:** MISSING
+- **Expected persona(s):** data-protection, regulator, platform-architect
+- **Catching question looks like:** "Thirteen and thirty-six months are stated as fixed numbers with no purpose or lawful basis tied to either duration, and no flag for whether a customer under a stricter regime can vary them. Is this a considered platform limit or an unexamined default, and what happens the first time a customer's regulator asks why the number is what it is?"
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by platform-architect, data-protection, regulator
+
+### D-18: 'seat activity' is undefined (banked 2026-07-18)
+
+- **Location:** Section 5, FB-6: "seat activity, top features, and usage trend over a selected period"
+- **Gap class:** AMBIGUOUS
+- **Expected persona(s):** data-protection
+- **Catching question looks like:** "'Seat activity' is never defined. Does it name or count identifiable individuals, or is it an anonymised aggregate? This report is white-labelled and handed to the workspace's own customers, so if it identifies people it is a disclosure of end-user activity to a third party the end user never dealt with directly, and that needs a stated basis, not an assumption."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by data-protection
+
+### D-19: deletion does not address already-distributed reports (banked 2026-07-18)
+
+- **Location:** Section 5, FB-8: "Beacon deletes that user's events within 30 days" versus FB-6's generated usage reports and FB-5's shared live reports; nothing states whether a deletion touches a report already generated or already shared
+- **Gap class:** EDGE-CASE
+- **Expected persona(s):** data-protection, security-compliance
+- **Catching question looks like:** "FB-8 deletes the user's events. D-10 covers whether the rollups restate. But what about a white-labelled usage report already generated and emailed to a customer, or a CSV already exported, before the deletion ran? Those are static copies outside Beacon's own stores. Does deletion reach them, and if not, is that limitation stated anywhere a customer or regulator would see it?"
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by security-compliance, data-protection
+
+### D-20: a deleted user's pseudonymous id resurfacing after deletion is undefined (banked 2026-07-18)
+
+- **Location:** Section 5, FB-8: "Beacon deletes that user's events within 30 days and records the request and completion in a deletion log visible to workspace administrators"; nothing addresses the host application sending new events under the same pseudonymous id after deletion completes
+- **Gap class:** EDGE-CASE
+- **Expected persona(s):** data-protection, engineer
+- **Catching question looks like:** "If the host application fires a new event under the same pseudonymous id the day after a deletion completes, does Beacon start collecting for that id again as if nothing happened, or does completing a deletion request also suppress future events for that id? Either answer is defensible, but FB-8 states neither, and an administrator reading the deletion log has no way to know which one they got."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by data-protection, engineer
+
+### D-21: no audit trail for Beacon's own access to a customer's CRM (banked 2026-07-18)
+
+- **Location:** Section 8: "pilot customers will grant CRM access for measuring G-3" and Section 1, G-3: "Share of renewal opportunities in pilot customers' CRMs with a Beacon usage report attached"
+- **Gap class:** MISSING
+- **Expected persona(s):** regulator, security-compliance
+- **Catching question looks like:** "Measuring G-3 means Beacon staff, or a Beacon process, get access to a pilot customer's own CRM, which holds that customer's commercially sensitive renewal data, not Beacon's. Section 7's audit provisions cover tenant isolation and sign-in within Beacon's own product. Where is the access-logging and retention story for Beacon looking inside someone else's CRM, and who can see that log?"
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by regulator, security-compliance
+
 ## Clean areas (for scoring false positives)
 
 Sections a persona might reflexively flag, which the key marks as cleanly
@@ -103,13 +175,23 @@ answered. A question treating any of these as a gap is a false positive.
 
 | Persona | Seeded | Defect ids |
 |---|---|---|
-| engineer | 3 | D-6, D-8, D-12 (D-6, D-12 shared with another persona) |
-| qa | 3 | D-3, D-4, D-10 |
+| engineer | 6 | D-6, D-8, D-12, D-13, D-14, D-20 (several shared with another persona) |
+| qa | 5 | D-3, D-4, D-10, D-13, D-14 |
 | end-user | 0 | (covered in bench-01) |
-| security-compliance | 1 | D-7 |
-| platform-architect | 1 | D-2 |
-| data-protection | 2 | D-1, D-10 |
+| security-compliance | 5 | D-7, D-15, D-16, D-19, D-21 |
+| platform-architect | 2 | D-2, D-17 |
+| data-protection | 7 | D-1, D-10, D-16, D-17, D-18, D-19, D-20 |
 | accessibility | 1 | D-11 |
 | commercial-viability | 2 | D-5, D-9 |
 | operations-support | 2 | D-6, D-12 |
-| regulator | 2 | D-1, D-2 |
+| regulator | 4 | D-1, D-2, D-17, D-21 |
+
+## Per-gap-class counts (this benchmark)
+
+| Gap class | Count | Defect ids |
+|---|---|---|
+| MISSING | 10 | D-5, D-6, D-7, D-11, D-13, D-14, D-15, D-16, D-17, D-21 |
+| CONTRADICTS | 2 | D-1, D-2 |
+| AMBIGUOUS | 3 | D-8, D-9, D-18 |
+| EDGE-CASE | 4 | D-10, D-12, D-19, D-20 |
+| UNMEASURABLE | 2 | D-3, D-4 |

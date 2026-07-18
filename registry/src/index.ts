@@ -34,7 +34,7 @@ function jsonResult(value: unknown, note?: string) {
 
 const server = new McpServer({
   name: "prd-studio-registry",
-  version: "0.2.2",
+  version: "0.2.3",
 });
 
 server.registerTool(

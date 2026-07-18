@@ -125,6 +125,14 @@ rule above. If the persona has no recorded baseline against the current key
 version, record one first (unedited persona, same procedure) before treating
 the comparison as a pass/fail gate.
 
+Variance clause (added after the first A/B regression): with two capped
+trials per arm, a one-catch difference between arms is within observed run
+variance and is judged alongside the sweep results, not mechanically. New
+false positives weigh heavier than a one-catch capped delta: an edit that
+adds false positives on any benchmark is rejected or reworked even where its
+catches improved. The cleanest comparison is A/B on the same day against the
+same key, original and edited arms run identically.
+
 ## Adding a benchmark
 
 Follow the shape of the existing benchmarks: a convincing PRD written to
