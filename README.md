@@ -207,7 +207,12 @@ into the Studio. Concept material, product thinking and mock examples only.
 Built by [Digital Illumination](https://digitalillumination.co.uk) and
 hardened on a real product re-platforming engagement before release: the
 method here is the method we run with clients, with the client specifics
-removed.
+removed. It has also been validated retrospectively: the shipped persona
+panel, run blind on a real engagement PRD, surfaced five of the six
+gaps that the engagement's own downstream sessions later confirmed were
+answerable at draft time, plus a set of material questions nobody had
+asked. That validation used private client material, so its record stays
+private; the public evidence base is [`evals/BASELINES.md`](evals/BASELINES.md).
 
 ## Licence
 
