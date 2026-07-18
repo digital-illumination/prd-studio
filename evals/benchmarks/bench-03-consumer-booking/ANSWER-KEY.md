@@ -135,6 +135,7 @@ it counts for that persona's rate.
 - **Expected persona(s):** engineer, operations-support
 - **Catching question looks like:** "Once a provider records a manual phone payment under FB-8, and that booking is later cancelled under FB-6 or FB-7, what reconciles the refund against a payment that was never tokenised or captured through the automated flow? Does the automatic refund still fire, and does anything stop it double-charging or double-refunding against the manually recorded one?"
 - **Provenance:** banked correction. Surfaced independently by the engineer and operations-support sweeps at the 2026-07-18 full-panel curation and judged genuine by the marker; not part of the original seeding.
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-18: FB-3 has no stated outcome for a payment decline at first-time checkout (banked 2026-07-18)
 
@@ -159,6 +160,7 @@ it counts for that persona's rate.
 - **Expected persona(s):** end-user
 - **Catching question looks like:** "Tom's walk-through has him open the app to check tomorrow's lesson, but no functional behaviour in section 5 describes a screen where a consumer sees their existing bookings. Where does that capability live, and what does it show?"
 - **Provenance:** banked correction. Surfaced by a blind end-user grill at the 2026-07-18 full-panel curation and judged genuine by the marker; not part of the original seeding.
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-21: FB-8's manual capture has no control on amount, no audit trail, and unclear retention coverage (banked 2026-07-18)
 

@@ -5,7 +5,10 @@ defects, D-8a and D-8b, after a live grill showed it bundled two distinct
 questions; D-13 to D-15 were added after the same grill surfaced real gaps
 this key had missed (see the "Bank the correction" rule in `../../README.md`).
 D-16 to D-28 were banked on 2026-07-18 from a full-panel sweep curation pass
-(provenance on each entry). Twenty-nine individually scored seeds in total.
+(provenance on each entry). D-18 was split into D-18a and D-18b on the same
+date, after the salience review below found it bundled the rest rule's
+measurement scope with its fixed-value question. Thirty individually scored
+seeds in total.
 Scoring rules are in
 `../../README.md`. "Location" gives the section and a quote fragment
 sufficient to find the seed. Where two personas are listed, either catching
@@ -95,7 +98,8 @@ it counts for that persona's rate.
 - **Location:** Section 8, assumption: "team members have personal smartphones and keep the Shiftly app installed"; every scenario in section 3 is app-based
 - **Gap class:** EDGE-CASE
 - **Expected persona(s):** end-user, accessibility (added 2026-07-18: device/app dependency is a digital-exclusion question, squarely the accessibility lens's exclusion-evidence remit, not only end-user's)
-- **Catching question looks like:** "Plenty of kitchen and warehouse staff do not bring a phone onto the floor, share a device, or will not install a work app on a personal phone. How do they see the rota, receive offers, or get told about swaps? A printed rota on the wall is the incumbent; what replaces it for them?"
+- **Catching question looks like:** "Section 8 assumes team members have personal smartphones and keep the Shiftly app installed, and every section 3 scenario is built on that assumption. What is the actual path for a kitchen or warehouse worker who does not own a smartphone, shares one with family, or will not install a work app on personal hardware: how do they see the rota, take an open shift, or learn a shift changed? The document names exactly one channel for every staff-facing function and no other, which is a hardware and software access barrier, not a mere inconvenience, and excludes a named real segment (kitchen and warehouse staff) from the product outright. A printed rota on the wall is the incumbent; what replaces it for the staff this design has no other path for?"
+- **Salience:** reworded 2026-07-18, uncaught by both full panels (2026-07-17 and 2026-07-18) despite accessibility being added as a second persona on 2026-07-18; the prior wording read as an end-user workflow gap rather than the accessibility lens's own exclusion-evidence test, which this wording now states directly. Review after the next panel before considering accept-as-hard.
 
 ### D-12: untestable acceptance check on notifications (subtle)
 
@@ -141,13 +145,21 @@ it counts for that persona's rate.
 - **Catching question looks like:** "A named-colleague swap has one counterparty who accepts under the approval policy, but 'to the team' broadcasts the offer to everyone. If more than one teammate is willing to take it, who is assigned, what breaks a near-simultaneous tie, and is there a timeout if nobody responds? And do teammates who were not chosen get told they were not selected, the same question D-8b answers for FB-3's open shifts, or does this branch stay silent?"
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by engineer, qa, end-user.
 
-### D-18: the 11-hour rest rule's measurement scope and fixed value are underspecified
+### D-18a: the 11-hour rest rule's measurement scope is underspecified
 
-- **Location:** Section 5, FB-5: "blocks any assignment that would leave less than 11 hours' rest between one shift's end and the next shift's start for the same person" and Section 6: "Rest-period rule (11 hours) | Platform (fixed)", read against OQ-1: "Can staff who work across two sites appear on both sites' rotas in the same week"
+- **Location:** Section 5, FB-5: "blocks any assignment that would leave less than 11 hours' rest between one shift's end and the next shift's start for the same person", read against OQ-1: "Can staff who work across two sites appear on both sites' rotas in the same week"
 - **Gap class:** AMBIGUOUS
 - **Expected persona(s):** qa, platform-architect
-- **Catching question looks like:** "FB-5 blocks under-11-hour rest 'for the same person', but OQ-1 is still open on whether a person can hold shifts on two sites in the same week. Is the 11-hour check scored against that person's shifts on one site, one team, or every shift they hold platform-wide? And section 6 fixes the 11 hours as a platform constant with no configuration point: is that number ever expected to vary (a different statutory minimum in a different market), or is 11 hours genuinely universal? Both answers change what the builder has to check and where."
-- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by qa, platform-architect. Narrows clean area 3 below: FB-5's overlap and rest-rule blocking mechanism is still cleanly answered, but its measurement scope is not.
+- **Catching question looks like:** "FB-5 blocks under-11-hour rest 'for the same person', but OQ-1 is still open on whether a person can hold shifts on two sites in the same week. Is the 11-hour check scored against that person's shifts on one site, one team, or every shift they hold platform-wide? Until OQ-1 resolves, the builder does not know what set of shifts to check the rest rule against."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by qa, platform-architect. Split from D-18 on 2026-07-18 (salience review), separating this measurement-scope question from D-18b's fixed-value question, per the one-defect-one-question rule. Narrows clean area 3 below: FB-5's overlap and rest-rule blocking mechanism is still cleanly answered, but its measurement scope is not.
+
+### D-18b: the 11-hour rest rule's fixed value has no configuration point
+
+- **Location:** Section 6: "Rest-period rule (11 hours) | Platform (fixed)"
+- **Gap class:** AMBIGUOUS
+- **Expected persona(s):** platform-architect
+- **Catching question looks like:** "Section 6 fixes the 11-hour rest rule as a platform constant with no configuration point. Is that number ever expected to vary, for example a different statutory minimum in a different market, or is 11 hours genuinely universal? As drawn there is no surface to change it if the answer is ever no."
+- **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by qa, platform-architect. Split from D-18 on 2026-07-18 (salience review), separating this fixed-value question from D-18a's measurement-scope question, per the one-defect-one-question rule. Narrows clean area 3 below alongside D-18a: the blocking mechanism itself remains cleanly answered.
 
 ### D-19: no withdrawal or cancellation path for a proposed swap
 
@@ -164,6 +176,7 @@ it counts for that persona's rate.
 - **Expected persona(s):** engineer, qa
 - **Catching question looks like:** "FB-1 raises a coverage warning for an understaffed period, but FB-2's publish block is defined purely by date: 7 days out. Can a manager publish a rota that still has an open coverage warning, or does the builder block that too? If it is advisory only, what is the point of the warning at publish time, and if it blocks, FB-2 needs to say so."
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by end-user.
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-21: no fallback when an open shift is never taken, despite feeding the unfilled-shift goal
 
@@ -172,6 +185,7 @@ it counts for that persona's rate.
 - **Expected persona(s):** end-user, qa
 - **Catching question looks like:** "FB-3 describes an offer being accepted; it does not say what happens if nobody accepts, or if the same unpopular shift is offered, declined by everyone eligible, and offered again. Does it return to the manager, get re-offered on a timer, or sit open indefinitely? G-1's whole target, cutting unfilled shifts from 8% to 4%, depends on what happens in exactly this case."
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by end-user.
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-22: no audit trail for who initiated, approved or declined a swap
 
@@ -188,6 +202,7 @@ it counts for that persona's rate.
 - **Expected persona(s):** platform-architect, engineer
 - **Catching question looks like:** "The identity service is both a named dependency and a protected 'do not change' boundary. The notifications service and the absence calendar read API are named dependencies too, but neither appears on the do-not-change list. Is that an oversight, or is it deliberate because this slice is allowed to change those integrations? If it's an oversight, an agent building this slice has no signal that breaking either one is out of bounds."
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by platform-architect.
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-24: no subject-access, correction or erasure path for any held data category
 
@@ -228,6 +243,7 @@ it counts for that persona's rate.
 - **Expected persona(s):** regulator
 - **Catching question looks like:** "Section 2 flags lifeguard roles as carrying extra approval weight, which reads as a statutory safety minimum (a pool cannot legally operate below a lifeguard ratio), not a staffing preference like an extra till operator on a busy Saturday. FB-1 treats every role's configured minimum the same way, a soft coverage warning. Should a shortfall against a statutory minimum carry a harder consequence, such as blocking publish or escalation, than a shortfall against a preference-driven one, and how does the system know which kind of minimum it is looking at?"
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by regulator.
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ## Clean areas (for scoring false positives)
 
@@ -236,26 +252,26 @@ answered. A question treating any of these as a gap is a false positive.
 
 1. **Payroll export non-scope (section 4).** Explicitly out, with the named workaround (existing timesheet CSV export) and a pointer to the separate scoped slice (PRD-2026-009). "Where is payroll integration?" is answered in the text.
 2. **Rota view performance (section 7).** A concrete, testable target: under 2 seconds at the 95th percentile, sites up to 200 staff, named reference device and network. Flagging this NFR as vague or missing is a false positive.
-3. **Conflict prevention, narrowed 2026-07-18 (section 5, FB-5).** The blocking mechanism itself is precisely stated, enforced on every assignment path, with an acceptance check naming the observable error; questions asking "what stops double-booking?" are answered cleanly. This clean area no longer covers the rest rule's measurement scope or its fixed value: questions about how the rule interacts with overnight shifts are D-10, and questions about whether the 11 hours is scored within one site/team or across all of a person's shifts platform-wide, or whether 11 hours itself is configurable, are D-18. Neither is a false positive.
+3. **Conflict prevention, narrowed 2026-07-18 (section 5, FB-5).** The blocking mechanism itself is precisely stated, enforced on every assignment path, with an acceptance check naming the observable error; questions asking "what stops double-booking?" are answered cleanly. This clean area no longer covers the rest rule's measurement scope or its fixed value: questions about how the rule interacts with overnight shifts are D-10, and questions about whether the 11 hours is scored within one site/team or across all of a person's shifts platform-wide are D-18a, and questions about whether 11 hours itself is configurable are D-18b. Neither is a false positive.
 
 None of the three clean areas above conflict with D-13, D-14 or D-15: payroll
 export non-scope, rota view performance and FB-5 conflict prevention are
 untouched by the missed-deadline escalation gap, the Premium-tier marketplace
 gap or the retention gap. Clean areas 1 and 2 stand as written against D-16 to
-D-28 too. Clean area 3 was narrowed on 2026-07-18 (see its entry above): D-18's
-rest-rule scope and fixed-value question sits outside what clean area 3 now
-covers, alongside the existing D-10 carve-out for overnight shifts; the
-blocking mechanism itself remains cleanly answered.
+D-28 too. Clean area 3 was narrowed on 2026-07-18 (see its entry above): D-18a
+and D-18b's rest-rule scope and fixed-value questions sit outside what clean
+area 3 now covers, alongside the existing D-10 carve-out for overnight shifts;
+the blocking mechanism itself remains cleanly answered.
 
 ## Per-persona seed counts (this benchmark)
 
 | Persona | Seeded | Defect ids |
 |---|---|---|
 | engineer | 10 | D-2, D-7, D-8a, D-8b, D-10, D-13, D-16, D-17, D-20, D-23 (most shared with another persona) |
-| qa | 11 | D-1, D-2, D-8b, D-10, D-12, D-14, D-16, D-17, D-18, D-20, D-21 |
+| qa | 11 | D-1, D-2, D-8b, D-10, D-12, D-14, D-16, D-17, D-18a, D-20, D-21 |
 | end-user | 4 | D-9, D-11, D-19, D-21 |
 | security-compliance | 2 | D-5, D-22 |
-| platform-architect | 3 | D-4, D-18, D-23 |
+| platform-architect | 4 | D-4, D-18a, D-18b, D-23 |
 | data-protection | 3 | D-3, D-15, D-24 |
 | accessibility | 2 | D-6, D-11 (D-11 shared with end-user, added 2026-07-18) |
 | commercial-viability | 3 | D-14, D-25, D-26 |
@@ -266,7 +282,7 @@ blocking mechanism itself remains cleanly answered.
 
 | Gap class | Count | Defect ids |
 |---|---|---|
-| AMBIGUOUS | 5 | D-8a, D-9, D-18, D-20, D-28 |
+| AMBIGUOUS | 6 | D-8a, D-9, D-18a, D-18b, D-20, D-28 |
 | CONTRADICTS | 3 | D-2, D-3, D-4 |
 | EDGE-CASE | 5 | D-8b, D-10, D-11, D-16, D-17 |
 | MISSING | 14 | D-5, D-6, D-7, D-13, D-14, D-15, D-19, D-21, D-22, D-23, D-24, D-25, D-26, D-27 |

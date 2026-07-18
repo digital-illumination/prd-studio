@@ -375,6 +375,45 @@ they are false positives all the same. The marker noted two of
 Haiku's own catches as borderline readings; a stricter marker would score
 Haiku 2/6.
 
+## Third-attempt A/B and salience v2, 2026-07-18 (post-salience keys)
+
+After the salience v2 review (bench-01 now 30 seeds with the D-18a/D-18b
+split and a substantive D-11 reword; watch lines added to first-outing
+banked seeds; bench-02's D-8 noted as run variance), the third hardening
+attempt ran as surgical minimal-delta drafts: operations-support 1.1.2
+(the rejected 1.1.0's hunts plus the sharpened acceptance-check boundary
+1.1.1 lacked) and end-user 1.1.2 (shipped 1.0.0 plus one calibration line,
+no new hunts).
+
+| Persona | Benchmark | A capped (own) | B capped (own) | Notes |
+|---|---|---|---|---|
+| operations-support | bench-01 | D-7, D-13 | D-7, D-13 | identical arms; 1.1.1's wipeout cured |
+| operations-support | bench-02 | D-6 | D-6, D-12 | D-12 caught capped |
+| operations-support | bench-03 | D-22 | none (sweep: D-16, D-22) | one-catch delta, within variance |
+| end-user | bench-01 | D-19 | D-19 | equal |
+| end-user | bench-02 | none (0 own seeds) | none | zero FPs, both arms |
+| end-user | bench-03 | D-11, D-15 | none in trials 1-2 | went to a 4-trial tie-breaker |
+
+False positives: zero, in every run of both arms, including the benchmark
+where every prior end-user draft had tripped.
+
+**Tie-breaker (end-user, bench-03, two extra capped trials per arm):**
+A-arm extras caught D-11 and D-15 (union over four trials: D-11, D-15).
+B-arm extras caught D-11 twice (union over four trials: D-11). The four-trial
+gap is one catch, within the variance clause, with equal sweep counts and
+the FP cure holding. Both of the 1.1.2 arm's extra-trial catches were D-11,
+the seed flagged by both salience reviews.
+
+**Verdicts: both 1.1.2 drafts SHIPPED.** operations-support 1.1.2 passed
+outright (parity on bench-01, a capped gain on bench-02, one-catch variance
+on bench-03, zero false positives). end-user 1.1.2 passed after the
+tie-breaker (one-catch four-trial gap within variance, sweeps equal, false
+positives cured). Third attempt, gate satisfied on the evidence rather than
+relaxed: the two failed attempts and this pass are all recorded above.
+
+These arms' results are the current baselines for both personas against the
+post-salience keys (bench-01: 30 seeds).
+
 ## Reading these numbers
 
 Baselines recorded against an older key version are not directly comparable

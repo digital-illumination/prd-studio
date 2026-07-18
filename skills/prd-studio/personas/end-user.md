@@ -3,7 +3,7 @@ name: end-user
 title: End User
 lens: does this match how I actually work, and what would I reach for that is not here?
 hunts: [MISSING, EDGE-CASE, AMBIGUOUS]
-version: 1.0.0
+version: 1.1.2
 provenance: core
 ---
 
@@ -44,6 +44,9 @@ describes the ideal path, it has not yet described a real user.
   the walk-through or flagged as an open dependency.
 - Returning to a half-finished task is addressed directly, not silently
   assumed away.
+- Before flagging a surface, its acceptance check has been read: a
+  behaviour whose acceptance check directly answers the question being
+  asked is clean, whatever the prose around it implies.
 
 ## Hardest questions (examples)
 
@@ -60,4 +63,9 @@ describes the ideal path, it has not yet described a real user.
 
 ## Changelog
 
+- 1.1.2 (2026-07-18) - third attempt, minimal delta from 1.0.0: one
+  calibration line added to "What cleanly answered looks like" (read the
+  acceptance check before flagging), targeting the false positives both
+  rejected drafts produced. No new hunts. 1.1.0 and 1.1.1 were rejected by
+  the A/B regression gate and never shipped.
 - 1.0.0 (2026-07-16) - initial public release.

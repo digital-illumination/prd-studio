@@ -61,6 +61,7 @@ personas are listed, either catching it counts for that persona's rate.
 - **Gap class:** AMBIGUOUS
 - **Expected persona(s):** engineer
 - **Catching question looks like:** "What makes a user active for a feature: any event mapped to it, or a qualifying subset? And whose day: the workspace's timezone (as the 02:00 rollup implies), UTC, or the end user's? A user firing events at 23:50 and 00:10 is one active day or two depending on the answer, and I cannot compute FB-2 without it."
+- **Salience:** caught in the 2026-07-17 panel and by two of three models in the cross-model probe; uncaught in panel v2, treated as run variance, no change.
 
 ### D-9: 'eligible plans' is never defined
 
@@ -113,6 +114,7 @@ personas are listed, either catching it counts for that persona's rate.
 - **Expected persona(s):** security-compliance
 - **Catching question looks like:** "Section 7's tenant isolation guarantee covers query paths, reads. FB-8 is a write, a deletion request keyed only by a pseudonymous id. What stops an administrator in workspace A submitting a deletion request naming a pseudonymous id that actually belongs to workspace B? Tenant isolation on reads does not answer whether deletion submission is validated against the submitting workspace."
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by security-compliance
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-16: no classification gate on sensitive host-supplied attributes (banked 2026-07-18)
 
@@ -153,6 +155,7 @@ personas are listed, either catching it counts for that persona's rate.
 - **Expected persona(s):** data-protection, engineer
 - **Catching question looks like:** "If the host application fires a new event under the same pseudonymous id the day after a deletion completes, does Beacon start collecting for that id again as if nothing happened, or does completing a deletion request also suppress future events for that id? Either answer is defensible, but FB-8 states neither, and an administrator reading the deletion log has no way to know which one they got."
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by data-protection, engineer
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 
 ### D-21: no audit trail for Beacon's own access to a customer's CRM (banked 2026-07-18)
 
@@ -160,6 +163,7 @@ personas are listed, either catching it counts for that persona's rate.
 - **Gap class:** MISSING
 - **Expected persona(s):** regulator, security-compliance
 - **Catching question looks like:** "Measuring G-3 means Beacon staff, or a Beacon process, get access to a pilot customer's own CRM, which holds that customer's commercially sensitive renewal data, not Beacon's. Section 7's audit provisions cover tenant isolation and sign-in within Beacon's own product. Where is the access-logging and retention story for Beacon looking inside someone else's CRM, and who can see that log?"
+- **Salience:** uncaught on first outing, 2026-07-18 panel v2; review after the next panel.
 - **Provenance:** banked 2026-07-18, full-panel sweep curation, surfaced by regulator, security-compliance
 
 ## Clean areas (for scoring false positives)
