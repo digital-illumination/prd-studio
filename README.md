@@ -15,6 +15,13 @@ for the claude.ai route, and (optionally) a small local MCP server for
 persona lookup. Bring your own Claude; nothing here touches anyone else's
 servers.
 
+On the most recent recorded panel run of the public benchmark suite, the
+full panel caught 69% of seeded defects under the strict three-question cap,
+with near-zero false positives. Every number is reproducible from
+[`evals/BASELINES.md`](evals/BASELINES.md) using the procedures in
+[`evals/RUNBOOK.md`](evals/RUNBOOK.md); this is the capped-mode figure the
+runbook's own reporting rule requires for any public claim.
+
 ## Why
 
 Most PRDs fail late, in front of engineers, agents and eventually customers,
@@ -88,6 +95,11 @@ work starts, and `VALIDATE-BUILD` grades the finished build against the
 PRD. Run `GRILL-AUDIT` whenever you want a human expert to mark a completed
 round and bank corrections back into the persona files.
 
+A worked-example walkthrough is being published on the Digital Illumination
+site; until then, the eval benchmarks under
+[`evals/benchmarks/`](evals/benchmarks/) show real grill targets, and each
+benchmark's `ANSWER-KEY.md` shows the calibre of catching question expected.
+
 ## The persona library
 
 Personas are files, not hard-coded prompts:
@@ -116,7 +128,10 @@ Personas are files, so the library grows without touching any code. Run
 the command interviews you on the failure mode it should catch, then fills
 the template in.
 [`AUTHORING.md`](skills/prd-studio/personas/AUTHORING.md) is the method
-behind each section of that template.
+behind each section of that template. On the Claude Code plugin route,
+`ADD-PERSONA` also scaffolds a matching
+[`agents/grill-<name>.md`](agents/grill-TEMPLATE.md), so a custom persona
+joins the parallel grill instead of dropping out of it.
 
 The quality bar is not "sounds useful". A new persona earns its place in the
 library only by catching a seeded defect in the eval benchmarks (below) that
@@ -125,6 +140,15 @@ Overlap with an existing persona is the most common reason a proposed one
 does not ship.
 
 ## Install
+
+**Which route is for you?**
+
+- **Claude Code user:** the plugin (route 1), the strongest form, with a
+  parallel grill subagent per persona.
+- **claude.ai in the browser:** the Project route (route 2), or upload the
+  `skills/prd-studio` folder as a Skill (route 2b).
+- **Neither:** the files are plain markdown; any agent harness can run them
+  (route 3).
 
 Three routes, clearest first.
 
@@ -146,24 +170,45 @@ then dedupes and ranks what comes back into one ordered round.
 1. Create a project and paste
    [`project-instructions.md`](project-instructions.md) into its custom
    instructions.
-2. Add to the project's knowledge:
+2. Add to the Project's knowledge (the file-upload area of a claude.ai
+   Project):
    [`skills/prd-studio/prd-template.md`](skills/prd-studio/prd-template.md),
-   the persona files you want from
-   [`skills/prd-studio/personas/`](skills/prd-studio/personas/), and your
-   concept material.
+   all ten persona files from
+   [`skills/prd-studio/personas/`](skills/prd-studio/personas/) unless you
+   deliberately want a narrower panel, and your concept material. Export
+   Word documents to plain text, or paste the text directly; do not upload
+   a `.docx` file as-is.
 3. Start a chat and type `STATUS`. An honest "no PRD yet", in role, means
    you are set.
 
 Honest note: this route runs personas sequentially in one context. Same
 method, less rigour than the parallel plugin form; a persona reading the
 previous persona's questions before writing its own is a weaker grill than
-ten independent attempts.
+ten independent attempts. Expect a draft-and-grill cycle to take thirty to
+forty-five minutes of working session.
+
+### 2b. Skill upload (claude.ai or desktop, no terminal)
+
+Zip [`skills/prd-studio/`](skills/prd-studio/) and upload it as a Skill in
+claude.ai or the Claude desktop app. Same skill as the plugin route, run
+sequentially rather than in parallel. Gives browser users the skill form
+with no terminal required.
 
 ### 3. Manual skill copy
 
 Copy [`skills/prd-studio/`](skills/prd-studio/) into your project's
 `.claude/skills/`. Same skill as the plugin route, without the parallel
 subagents: personas run sequentially, as in the claude.ai route.
+
+### Grill a PRD you already have
+
+The most common starting point is not a blank slate, it is a PRD that
+already exists as a file.
+
+- **Claude Code:** open a session in the repo containing the PRD and say
+  `GRILL THE PRD` followed by the file path; the skill reads it directly.
+- **claude.ai:** upload the PRD to the project's knowledge, or paste it
+  into the chat, then type `GRILL THE PRD`.
 
 ## Persona evals
 
@@ -184,7 +229,9 @@ can pull persona definitions at call time instead of a hand copy of the
 files. Stdio only for now; a hosted mode, so a claude.ai connector or a
 remote client could reach the same registry over the network, is deferred,
 not ruled out. See [`registry/README.md`](registry/README.md) for the tools
-it exposes and how to run it.
+it exposes and how to run it. claude.ai and plugin users can ignore the
+registry entirely; it is for other agent harnesses that want live MCP
+access to the same files.
 
 ## Tips from real use
 

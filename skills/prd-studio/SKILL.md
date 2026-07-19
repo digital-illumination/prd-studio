@@ -66,7 +66,10 @@ Case-insensitive, with or without the leading slash.
   persona; with arguments, run only the named personas. Load and honour each
   persona file, max three questions per persona, hardest first. A question
   the PRD answers cleanly is never listed; a question it cannot answer
-  becomes a classified gap in the register, with an owner.
+  becomes a classified gap in the register, with an owner. The PRD can be
+  given as a file path (Claude Code) or as an uploaded or pasted document
+  (claude.ai); read it directly rather than asking the product owner to
+  restate it.
 - **/status**: honest convergence report: rounds run, open gaps by class
   and owner, goals without measurements, remaining `[OPEN]` markers, and a
   verdict: CONVERGED (two consecutive rounds with zero new material gaps,
@@ -81,7 +84,12 @@ Case-insensitive, with or without the leading slash.
   mode does this lens hunt that existing personas miss?) and fill the file
   in. Point at `personas/AUTHORING.md` and the eval quality bar: a new
   persona must catch a seeded eval defect no existing persona catches, or
-  sharpen an existing catch.
+  sharpen an existing catch. When running inside Claude Code with file
+  access, after writing the persona file also scaffold
+  `agents/grill-<name>.md` from `agents/grill-TEMPLATE.md`, filling in the
+  same lens, so the new persona joins the parallel grill. Without this
+  step the persona runs sequentially only and silently drops out of the
+  plugin's parallel architecture.
 - **/decompose**: from a converged PRD, emit the behaviour ledger: every
   functional behaviour with a stable id (FB-n), one observable behaviour, a
   Given/When/Then acceptance check, and a blast-radius tag (Minimal /

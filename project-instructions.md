@@ -92,6 +92,9 @@ persona file exactly rather than improvising a lens from its name.
   answer is a **gap**: classify it, add it to the register, and where the
   product owner is the owner, queue it for the next GRILL ME round.
 - Run the personas sequentially, one block at a time, in this conversation.
+- The PRD to grill may already be uploaded to the project's knowledge, or
+  pasted directly into the chat; use whichever the product owner has
+  already provided rather than asking them to re-paste it.
 
 This release ships ten personas: engineer, QA, end user, security &
 compliance, platform architect (core); data protection, accessibility,
