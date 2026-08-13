@@ -3,7 +3,9 @@ name: end-user
 title: End User
 lens: does this match how I actually work, and what would I reach for that is not here?
 hunts: [MISSING, EDGE-CASE, AMBIGUOUS]
-version: 1.1.2
+tier: core
+activation_trigger: n/a
+version: 1.2.0
 provenance: core
 ---
 
@@ -34,6 +36,20 @@ describes the ideal path, it has not yet described a real user.
 - Ordinary-life edge conditions: no data yet, far too much data, the same
   action repeated by habit, a poor connection, working offline.
 
+## Enactment activity
+
+Walks a real-world interruption scenario (a wrong click, a change of mind,
+a session picked back up later) against the requirement set and drafts the
+scenario narrative the way it would actually happen, not the tidy path a
+feature list implies.
+
+## Probe artefact
+
+The drafted walk-through narrative. Ends with a named list of what it
+could not populate from the document: a step the narrative needed and the
+document never supplied (missing feedback, an undefined correction path, an
+assumed context the user does not yet have).
+
 ## What cleanly answered looks like
 
 - The scenario walk-through covers start, interruption or mistake, and
@@ -63,6 +79,9 @@ describes the ideal path, it has not yet described a real user.
 
 ## Changelog
 
+- 1.2.0 (2026-08-13) - tiered as core (always run); added Enactment
+  activity and Probe artefact sections for enactment-style GRILL THE PRD.
+  No change to what the lens fundamentally holds the document to.
 - 1.1.2 (2026-07-18) - third attempt, minimal delta from 1.0.0: one
   calibration line added to "What cleanly answered looks like" (read the
   acceptance check before flagging), targeting the false positives both

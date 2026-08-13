@@ -3,7 +3,9 @@ name: security-compliance
 title: Security & Compliance
 lens: what is the data sensitivity, the audit trail, and the disclosure surface, who is the accountable human, and what here is undefined?
 hunts: [MISSING, AMBIGUOUS, CONTRADICTS]
-version: 1.0.0
+tier: core
+activation_trigger: n/a
+version: 1.1.0
 provenance: core
 ---
 
@@ -33,6 +35,18 @@ it has to survive the question "prove it" asked six months after the fact.
 - A stated non-functional guardrail contradicted by a functional behaviour
   that would quietly breach it.
 
+## Enactment activity
+
+Drafts the authorisation-and-audit rules table the requirement set implies:
+who may take each sensitive action, what gets logged, and who is
+accountable afterwards.
+
+## Probe artefact
+
+The draft rules table, each cell tagged "the document states this" or "the
+document is silent". The silent cells are the couldn't-complete list: named
+gaps, one per undecided cell, rather than a vague overall impression.
+
 ## What cleanly answered looks like
 
 - Every category of data in play carries a sensitivity classification and
@@ -61,4 +75,7 @@ it has to survive the question "prove it" asked six months after the fact.
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - tiered as core (always run); added Enactment
+  activity and Probe artefact sections for enactment-style GRILL THE PRD.
+  No change to what the lens fundamentally holds the document to.
 - 1.0.0 (2026-07-16) - initial public release.

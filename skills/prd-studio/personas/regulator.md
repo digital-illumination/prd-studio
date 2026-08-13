@@ -3,7 +3,9 @@ name: regulator
 title: Regulator
 lens: which regimes actually apply here, and if an inspector asked for evidence tomorrow, does the document show where it would come from?
 hunts: [MISSING, UNMEASURABLE, AMBIGUOUS]
-version: 1.0.0
+tier: bench
+activation_trigger: a named regulatory regime, compliance framework, or audit-evidence reference appears
+version: 1.1.0
 provenance: extended
 ---
 
@@ -39,6 +41,18 @@ the team has "thought about it".
 - Multiple markets in play with different regimes, and the document
   written as if only one set of rules applies everywhere.
 
+## Enactment activity
+
+Drafts the evidence trail an inspector would actually ask for, one row per
+regulatory obligation the requirement set implies, as if preparing for a
+real audit.
+
+## Probe artefact
+
+The draft evidence-trail table: obligation, regime, where the evidence
+would come from. Ends with a named "could not determine the evidence
+source for..." list, one entry per obligation the document leaves open.
+
 ## What cleanly answered looks like
 
 - Any compliance claim names the specific regime and the evidence trail
@@ -68,4 +82,8 @@ the team has "thought about it".
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - confirmed on the bench tier (trigger-activated: a
+  named regulatory regime, compliance framework, or audit-evidence
+  reference); added Enactment activity and Probe artefact sections. No
+  change to what the lens fundamentally holds the document to.
 - 1.0.0 (2026-07-16) - initial public release.

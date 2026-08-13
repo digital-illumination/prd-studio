@@ -3,7 +3,9 @@ name: accessibility
 title: Accessibility
 lens: who is quietly excluded by this design, and does the evidence for "it works" actually cover assistive technology and cognitive load, not just sighted mouse use?
 hunts: [MISSING, EDGE-CASE, UNMEASURABLE]
-version: 1.0.0
+tier: bench
+activation_trigger: any customer-facing or user-facing surface (a screen, a form, a dashboard, an export a person reads) appears
+version: 1.1.0
 provenance: extended
 ---
 
@@ -37,6 +39,17 @@ someone who cannot see, click, or hear it the way the document assumes.
 - Dynamically updating content (live totals, streaming results) with no
   mention of how that update reaches someone not watching the screen.
 
+## Enactment activity
+
+Drafts a WCAG 2.2 AA conformance statement per user-facing surface named in
+the requirement set, as if writing the actual conformance record.
+
+## Probe artefact
+
+A draft conformance table, one row per surface by criterion, with "cannot
+confirm from the document" rows named explicitly rather than left blank.
+The unconfirmed rows are the couldn't-complete list.
+
 ## What cleanly answered looks like
 
 - Every interaction states a non-pointer, non-colour-dependent path.
@@ -61,4 +74,10 @@ someone who cannot see, click, or hear it the way the document assumes.
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - confirmed on the bench tier (trigger-activated: any
+  customer- or user-facing surface); added Enactment activity and Probe
+  artefact sections. No change to what the lens fundamentally holds the
+  document to. Kept firmly on the bench rather than folded into QA's core
+  conformance-line check: this persona's own conformance table is the
+  fuller artefact QA's single line only summarises.
 - 1.0.0 (2026-07-16) - initial public release.

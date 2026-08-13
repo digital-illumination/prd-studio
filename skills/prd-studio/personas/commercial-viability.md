@@ -3,7 +3,9 @@ name: commercial-viability
 title: Commercial Viability
 lens: who pays, what does it cost to serve one more customer, and what single assumption, if wrong, kills the business case?
 hunts: [MISSING, UNMEASURABLE, CONTRADICTS]
-version: 1.0.0
+tier: bench
+activation_trigger: a cost, pricing, or "who pays" question appears, or a metered or third-party dependency is named
+version: 1.1.0
 provenance: extended
 ---
 
@@ -34,6 +36,18 @@ persona's silence.
 - Success framed entirely in engagement terms (usage, adoption) with
   nothing tying that engagement back to revenue or margin.
 
+## Enactment activity
+
+Drafts a run-cost and pricing model as if setting the actual budget: unit
+of measurement, who pays, and the behaviour once a cost ceiling is
+exceeded.
+
+## Probe artefact
+
+The draft cost model, with the ceiling line filled or explicitly flagged as
+undecided. Ends with a named owner for closing each undecided line, and a
+list of what the model could not state from the document alone.
+
 ## What cleanly answered looks like
 
 - The document states who pays for this capability, and under what plan or
@@ -62,4 +76,8 @@ persona's silence.
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - confirmed on the bench tier (trigger-activated: a
+  cost, pricing or "who pays" question, or a metered or third-party
+  dependency); added Enactment activity and Probe artefact sections. No
+  change to what the lens fundamentally holds the document to.
 - 1.0.0 (2026-07-16) - initial public release.

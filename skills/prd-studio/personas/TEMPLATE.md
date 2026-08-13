@@ -9,6 +9,8 @@ name: <kebab-case-name>                 <!-- must match the filename, no extensi
 title: <Human Title>                    <!-- e.g. "Data Protection", "Engineer" -->
 lens: <one line: the question this persona holds the PRD to>
 hunts: [<GAP-CLASS>, <GAP-CLASS>]       <!-- 1 to 3 of: AMBIGUOUS, CONTRADICTS, MISSING, EDGE-CASE, UNMEASURABLE -->
+tier: core                              <!-- or: bench -->
+activation_trigger: n/a                 <!-- core: n/a. bench: one line, the requirement-shape signal that fires this persona -->
 version: 1.0.0
 provenance: core                        <!-- or: extended -->
 ---
@@ -34,11 +36,29 @@ a product it has never seen before. -->
 -
 -
 
+## Enactment activity
+
+<!-- One or two sentences: the downstream activity this persona's lens
+would actually perform on this document (a technical approach, a test
+strategy, a boundary decision, a cost model, a defence paragraph). Not a
+question list; a thing a professional occupying this standpoint would
+actually go and do with the document in hand. -->
+
+## Probe artefact
+
+<!-- What the activity above produces, and its shape: a short build note, a
+draft table, a drafted paragraph, a stub schedule. Always ends with a named
+"could not complete" list: the specific facts, decisions or values the
+document does not state clearly enough for the artefact to finish cleanly.
+Each entry on that list becomes a classified gap in the Open Questions
+register, exactly the way a raised question does. -->
+
 ## What cleanly answered looks like
 
-<!-- 3 to 5 bullets. The conditions under which this persona has nothing left
-to ask. If you cannot write this section honestly, the persona is not done:
-a persona that can never fall silent is not interrogating the document, it
+<!-- 3 to 5 bullets. The conditions under which this persona's probe
+artefact completes with an empty couldn't-complete list. If you cannot
+write this section honestly, the persona is not done: a persona whose
+artefact can never complete cleanly is not interrogating the document, it
 is performing a role. -->
 
 -
@@ -47,10 +67,11 @@ is performing a role. -->
 
 ## Hardest questions (examples)
 
-<!-- 3 to 5 example questions at the calibre this persona should reach.
-Generic products only: a scheduling tool, an analytics dashboard, a
-payments flow, or similar. Never a real client, domain, or dataset. These
-are illustrations of the standard, not a script to run verbatim. -->
+<!-- 3 to 5 example couldn't-complete entries at the calibre this persona
+should reach, tied to generic products only: a scheduling tool, an
+analytics dashboard, a payments flow, or similar. Never a real client,
+domain, or dataset. These are illustrations of the standard, not a script
+to run verbatim. -->
 
 -
 -

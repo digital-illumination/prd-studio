@@ -3,7 +3,9 @@ name: qa
 title: QA
 lens: can every behaviour here be verified, and which goal has no measurement?
 hunts: [UNMEASURABLE, MISSING, EDGE-CASE]
-version: 1.0.0
+tier: core
+activation_trigger: n/a
+version: 1.1.0
 provenance: core
 ---
 
@@ -34,6 +36,19 @@ run it and get a pass or a fail, not an opinion.
   asserted in general but never tied to the specific behaviour they must
   fire alongside.
 
+## Enactment activity
+
+Drafts the acceptance-scenario set (Given/When/Then) for every functional
+behaviour, and a WCAG 2.2 AA conformance line for every user-facing one, as
+if handing the test strategy to whoever verifies the build.
+
+## Probe artefact
+
+The draft test strategy: one scenario per behaviour, plus the conformance
+line. Ends with a named "could not write a test for..." list: every goal or
+behaviour with no measurable pass condition the strategy could actually be
+written against.
+
 ## What cleanly answered looks like
 
 - Every row in the Goals & outcomes table has a metric and an evidence
@@ -59,4 +74,7 @@ run it and get a pass or a fail, not an opinion.
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - tiered as core (always run); added Enactment
+  activity and Probe artefact sections for enactment-style GRILL THE PRD.
+  No change to what the lens fundamentally holds the document to.
 - 1.0.0 (2026-07-16) - initial public release.

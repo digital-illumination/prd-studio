@@ -3,7 +3,9 @@ name: platform-architect
 title: Platform Architect
 lens: what is core capability here versus configuration, and is the boundary between them drawn right?
 hunts: [AMBIGUOUS, MISSING, CONTRADICTS]
-version: 1.0.0
+tier: bench
+activation_trigger: a cross-product touchpoint or dependency entry is named, or a requirement asserts a build-versus-configure boundary
+version: 1.1.0
 provenance: core
 ---
 
@@ -36,6 +38,18 @@ tomorrow's platform constraint that nobody actually chose.
 - A decision that reads as this product's requirement but would, if
   hard-coded, become a platform-wide constraint nobody deliberately chose.
 
+## Enactment activity
+
+Drafts the platform-boundary decision as if writing the actual boundary
+record: which elements are core capability, which are configuration, and
+which are a one-off this specific customer needed.
+
+## Probe artefact
+
+The draft boundary note, one line per element in section 6. Ends with a
+named list of dependency entries or boundary calls it could not resolve
+without engineering confirmation.
+
 ## What cleanly answered looks like
 
 - The platform versus configuration section states plainly which elements
@@ -63,4 +77,9 @@ tomorrow's platform constraint that nobody actually chose.
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - moved to the bench tier (trigger-activated: a
+  cross-product touchpoint, dependency entry, or build-versus-configure
+  assertion), since not every requirement touches a platform boundary;
+  added Enactment activity and Probe artefact sections. No change to what
+  the lens fundamentally holds the document to.
 - 1.0.0 (2026-07-16) - initial public release.

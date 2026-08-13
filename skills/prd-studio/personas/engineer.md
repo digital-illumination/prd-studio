@@ -3,7 +3,9 @@ name: engineer
 title: Engineer
 lens: could I build this without guessing, and where would I stall?
 hunts: [MISSING, AMBIGUOUS, EDGE-CASE]
-version: 1.1.0
+tier: core
+activation_trigger: n/a
+version: 1.2.0
 provenance: core
 ---
 
@@ -44,6 +46,20 @@ tight budget.
 - Day-one and migration state unaddressed: what the system looks like
   before any data exists, or when old and new behaviour must coexist.
 
+## Enactment activity
+
+Drafts the technical approach for each requirement, as if handing it
+straight to whoever builds it: what it would call, what state it would
+touch, and where it would stall.
+
+## Probe artefact
+
+A short build note per requirement, plus a stated run-cost ceiling line
+(or an explicit "not applicable, negligible cost" statement) where a
+metered dependency is in play. Ends with a named "stalled here, needed X"
+list: every point the note could not be finished without inventing a
+decision that belongs to the product owner.
+
 ## What cleanly answered looks like
 
 - Every functional behaviour names its trigger, its inputs, its output, and
@@ -73,6 +89,9 @@ tight budget.
 
 ## Changelog
 
+- 1.2.0 (2026-08-13) - tiered as core (always run); added Enactment
+  activity and Probe artefact sections for enactment-style GRILL THE PRD.
+  No change to what the lens fundamentally holds the document to.
 - 1.1.0 (2026-07-18) - sharpened after the first full-panel baseline:
   state-model, boundary-value and non-functional heuristics extended, an
   on-lens discipline note added.
