@@ -3,7 +3,9 @@ name: operations-support
 title: Operations & Support
 lens: what does day two look like, who gets paged, who fields the ticket, and can anyone see what the system is actually doing right now?
 hunts: [MISSING, EDGE-CASE, UNMEASURABLE]
-version: 1.1.2
+tier: bench
+activation_trigger: a live production support surface, an on-call or monitoring reference, or "day two" language appears
+version: 1.2.0
 provenance: extended
 ---
 
@@ -49,6 +51,18 @@ that merely exists, but answers a different question, does not: an
 acceptance check proving the happy path says nothing about the failure
 path, and the failure path is what this lens hunts.
 
+## Enactment activity
+
+Drafts the handover note an on-call operator or support agent would
+actually see the moment something goes wrong, as if writing it for real.
+
+## Probe artefact
+
+The drafted handover note: what broke, what an operator sees, what a
+support agent can do about it. Ends with a named list of what it could not
+populate from the document: a failure mode with no visible signal, a
+support action with no stated boundary, a rollback path never named.
+
 ## What cleanly answered looks like
 
 - Every failure mode with customer impact has a named signal an operator or
@@ -79,6 +93,10 @@ path, and the failure path is what this lens hunts.
 
 ## Changelog
 
+- 1.2.0 (2026-08-13) - confirmed on the bench tier (trigger-activated: a
+  live production support surface, an on-call or monitoring reference, or
+  "day two" language); added Enactment activity and Probe artefact
+  sections. No change to what the lens fundamentally holds the document to.
 - 1.1.2 (2026-07-18) - third attempt. Keeps 1.1.0's hunts (which caught
   previously missed seeds) and adds the acceptance-check boundary with the
   distinction 1.1.1 lacked: a check must answer the question asked, not

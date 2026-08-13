@@ -3,7 +3,9 @@ name: data-protection
 title: Data Protection
 lens: what is the lawful basis for holding this data, how long is it kept, can a subject exercise their rights, and does anything cross a border it should not?
 hunts: [MISSING, AMBIGUOUS, CONTRADICTS]
-version: 1.0.0
+tier: bench
+activation_trigger: personal or special-category data, retention language, or a child or vulnerable-subject scenario appears
+version: 1.1.0
 provenance: extended
 ---
 
@@ -39,6 +41,22 @@ rights request.
 - Children's or other special-category data handled with no extra
   safeguard called out.
 
+## Enactment activity
+
+Drafts a lawful-basis-and-retention schedule, one row per category of
+personal data the requirement set creates, as if setting the actual
+retention policy.
+
+## Probe artefact
+
+The draft schedule: purpose, lawful basis, retention period, subject-rights
+path, per category. Ends with a named "could not determine the basis
+or retention for..." list, one entry per category the document leaves open.
+Caution stated plainly alongside the artefact: this asserts a general
+UK-GDPR-shaped structure, not a checked legal position, and should not be
+relied on for a live grill until a named legal or compliance function has
+reviewed it.
+
 ## What cleanly answered looks like
 
 - Every category of personal data names its purpose, its lawful basis, and
@@ -67,4 +85,10 @@ rights request.
 
 ## Changelog
 
+- 1.1.0 (2026-08-13) - confirmed on the bench tier (trigger-activated:
+  personal or special-category data, retention language, or a child or
+  vulnerable-subject scenario); added Enactment activity and Probe
+  artefact sections, with the legal-review caution stated directly on the
+  artefact rather than left implicit. No change to what the lens
+  fundamentally holds the document to.
 - 1.0.0 (2026-07-16) - initial public release.

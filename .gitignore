@@ -2,3 +2,5 @@
 node_modules/
 dist/
 evals/.blind
+__pycache__/
+*.pyc

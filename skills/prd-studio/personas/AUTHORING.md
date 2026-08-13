@@ -26,6 +26,20 @@ the next one), or a different kind of harm (a business that cannot pay its
 bills versus a user who cannot complete a task). Name that standpoint
 plainly in the `lens` line.
 
+## Core, bench, or a new tier decision entirely
+
+Every persona declares `tier: core` or `tier: bench` in its frontmatter. A
+core persona runs on every PRD, no exception: reserve that tier for a lens
+that genuinely applies to everything the studio might draft (buildability,
+verifiability, a named accountable human, a scope defence), not for a lens
+that merely feels important. A bench persona runs only when its
+`activation_trigger` line matches a shape signal in the requirement set, or
+when the product owner summons it directly; write that trigger as a
+concrete, checkable shape signal ("a UI, screen, form, dashboard or export
+reference"), not a vague topic name ("when relevant"). If you cannot state a
+crisp trigger, the persona probably belongs on the bench with a trigger that
+needs sharpening, not silently promoted to core to avoid the problem.
+
 ## Write heuristics, not scripts
 
 The "what it hunts" bullets are patterns the persona notices, not questions
@@ -46,6 +60,58 @@ The "hardest questions" section is the one place scripted examples belong,
 and only as illustrations of calibre, tied to generic products (a
 scheduling tool, an analytics dashboard, a payments flow). Never let a
 worked example creep back into the "what it hunts" bullets above it.
+
+## Enactment activity and probe artefact
+
+`GRILL THE PRD` runs every persona enactment style: the persona performs the
+activity its lens would actually produce downstream and reports the
+artefact, not a question list. Write "Enactment activity" as one or two
+sentences naming the concrete thing a professional occupying this
+standpoint would actually go and do with the document in hand (draft a
+technical approach, draft a test strategy, draft a boundary decision, draft
+a cost model), grounded in the same "what it hunts" heuristics above rather
+than inventing new ground the persona has not otherwise earned. Write
+"Probe artefact" as the shape that activity produces and, always, a named
+"could not complete" list: this list is where the persona's questions
+still live, just phrased as the specific facts, decisions or values the
+artefact could not be finished without. A "hardest questions" example is
+still useful as a calibration illustration of what belongs on that list at
+the right level of difficulty; it is not a second, separate output the
+persona produces alongside the artefact.
+
+## Re-casting for a domain
+
+A generic library like this one is not a domain library, and a client
+engagement or a specific product area will often want to re-cast it: merge
+two lenses into one sharper seat, add a domain-specific persona this
+library has no reason to carry generically, or narrow the bench to what
+that domain's products actually touch. That re-casting is expected and
+healthy. It has one rule, learned the costly way once already: **map every
+upstream lens explicitly, to kept, merged, or dropped-because, rather than
+letting a lens quietly disappear.**
+
+The cost of skipping that rule, told without any identifying detail: a
+generic ten-persona panel, including dedicated accessibility and
+cost-sensitivity lenses, was narrowed for a specific product domain. The
+narrowing was a real, deliberate piece of work: it added genuine
+domain-specific personas the generic library could not have written. But
+nobody sat down and decided, on purpose, to drop the accessibility and
+cost lenses; they simply were not carried over when the panel was rebuilt,
+and nothing since had checked the new panel against the full list of what
+the old one covered. The gap surfaced later, downstream, when a completed
+document's own review found accessibility unaddressed across every one of
+its requirements, and cost left unscored on every requirement that carried
+a metered dependency. Both gaps were exactly the shape the two dropped
+personas existed to catch. The re-cast was not wrong to narrow the panel;
+it was wrong to narrow it by omission instead of by a recorded decision a
+reviewer could check against the original list.
+
+When you re-cast this roster, write down the mapping before you ship it: a
+short table or list, one line per upstream persona, each line ending in
+"kept as-is", "merged into <new persona>", or "dropped, because <the
+domain-specific reason, stated plainly>". A domain persona that has no
+generic ancestor is a genuine addition and does not need a row. A dropped
+row with no reason is the exact failure this section exists to prevent.
 
 ## "What cleanly answered looks like" is the section that keeps the persona honest
 
